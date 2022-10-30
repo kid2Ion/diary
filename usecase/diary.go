@@ -8,7 +8,7 @@ import (
 type DiaryUsecase interface {
 	View() ([]*model.Diary, error)
 	Search(word string) ([]*model.Diary, error)
-	SearchByTag(tag int) ([]*model.Diary, error)
+	SearchByTag(tagId int) ([]*model.Diary, error)
 	Add(diary *model.Diary) (int64, error)
 	Edit(id int, diary *model.Diary) error
 	Delete(id int) error
@@ -41,8 +41,8 @@ func (du *diaryUsecase) Search(word string) ([]*model.Diary, error) {
 	return diaries, nil
 }
 
-func (du *diaryUsecase) SearchByTag(tag int) ([]*model.Diary, error) {
-	diaries, err := du.diaryRepository.FindByTag(tag)
+func (du *diaryUsecase) SearchByTag(tagId int) ([]*model.Diary, error) {
+	diaries, err := du.diaryRepository.FindByTag(tagId)
 	if err != nil {
 		return nil, err
 	}

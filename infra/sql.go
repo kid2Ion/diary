@@ -23,7 +23,7 @@ func NewSqlHandler() *SqlHandler {
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			title STRING NOT NULL,
 			content STRING NOT NULL,
-			tag INT NOT NULL,
+			tag_id INT NOT NULL,
 			created_at TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime')),
 			updated_at TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime'))
 		)`, tableName)

@@ -6,7 +6,7 @@ type Diary struct {
 	Id        int    `json:"id"`
 	Title     string `json:"title"`
 	Content   string `json:"content"`
-	Tag       int    `json:"tag"`
+	TagId     int    `json:"tagId"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }

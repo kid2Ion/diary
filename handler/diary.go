@@ -54,7 +54,7 @@ func (dh *diaryHandler) Search() echo.HandlerFunc {
 
 func (dh *diaryHandler) SearchByTag() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		tag := c.QueryParam("tag")
+		tag := c.QueryParam("tagId")
 		tagInt, err := strconv.Atoi(tag)
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, fmt.Errorf("failed to convert atoi"))
