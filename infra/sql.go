@@ -31,6 +31,18 @@ func NewSqlHandler() *SqlHandler {
 	if err != nil {
 		log.Fatal(err)
 	}
+	tableName = "tags"
+	cmd = fmt.Sprintf(`
+		CREATE TABLE IF NOT EXISTS %s (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			tag_content STRING NOT NULL,
+			created_at TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime')),
+			updated_at TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime'))
+		)`, tableName)
+	_, err = conn.Exec(cmd)
+	if err != nil {
+		log.Fatal(err)
+	}
 	sqlHandler := &SqlHandler{conn}
 	return sqlHandler
 }
