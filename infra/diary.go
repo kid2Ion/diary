@@ -4,11 +4,9 @@ import (
 	"database/sql"
 	"diary/domain/model"
 	"diary/domain/repository"
+	myutil "diary/utility"
 	"fmt"
-	"time"
 )
-
-var layout = "2006-01-02 15:04:05"
 
 type DiaryRepository struct {
 	SqlHandler
@@ -91,14 +89,9 @@ func rowsScan(diaries []*model.Diary, rows *sql.Rows) []*model.Diary {
 		var createdAt string
 		var updatedAt string
 		rows.Scan(&diary.Id, &diary.Title, &diary.Content, &diary.TagId, &createdAt, &updatedAt)
-		diary.CreatedAt = stringToTime(createdAt)
-		diary.UpdatedAt = stringToTime(updatedAt)
+		diary.CreatedAt = myutil.StringToTime(createdAt)
+		diary.UpdatedAt = myutil.StringToTime(updatedAt)
 		diaries = append(diaries, &diary)
 	}
 	return diaries
-}
-
-func stringToTime(str string) time.Time {
-	t, _ := time.Parse(layout, str)
-	return t
 }
