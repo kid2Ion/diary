@@ -11,4 +11,7 @@ func InitRouting(e *echo.Echo, diaryHandler DiaryHandler, tagHandler TagHandler)
 	e.DELETE("/delete/:id", diaryHandler.Delete())
 
 	e.GET("tags", tagHandler.View())
+	e.POST("/tags/new", tagHandler.Add())
+	e.PUT("/tags/edit/:id", tagHandler.Edit())
+	e.DELETE("/tags/delete/:id", tagHandler.Delete())
 }
