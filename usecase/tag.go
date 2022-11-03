@@ -7,6 +7,9 @@ import (
 
 type TagUsecase interface {
 	View() ([]*model.Tag, error)
+	Add(tag *model.Tag) (int64, error)
+	Edit(id int, tag *model.Tag) error
+	Delete(id int) error
 }
 
 type tagUsecase struct {
@@ -24,4 +27,30 @@ func (tu *tagUsecase) View() ([]*model.Tag, error) {
 		return nil, err
 	}
 	return tags, nil
+}
+
+func (tu tagUsecase) Add(tag *model.Tag) (int64, error) {
+	id, err := tu.TagRepository.Create(tag)
+	if err != nil {
+		return 0, err
+	}
+
+	return id, nil
+}
+
+func (tu tagUsecase) Edit(id int, tag *model.Tag) error {
+	err := tu.TagRepository.Update(id, tag)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (tu tagUsecase) Delete(id int) error {
+	err := tu.TagRepository.Delete(id)
+	if err != nil {
+		return err
+	}
+	return nil
 }
