@@ -34,3 +34,33 @@ func (tr *TagRepository) FindAll() ([]*model.Tag, error) {
 	}
 	return tags, nil
 }
+
+func (tr *TagRepository) Create(tag *model.Tag) (int64, error) {
+	res, err := tr.SqlHandler.Conn.Exec("INSERT INTO tags (tag_content) VALUES (?)", tag.TagContent)
+	if err != nil {
+		return 0, err
+	}
+	id, err := res.LastInsertId()
+	if err != nil {
+		return 0, err
+	}
+
+	return id, nil
+}
+
+func (tr *TagRepository) Update(id int, tag *model.Tag) error {
+	_, err := tr.SqlHandler.Conn.Exec("UPDATE tags SET tag_content = ? WHERE id = ?", tag.TagContent, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (tr *TagRepository) Delete(id int) error {
+	_, err := tr.SqlHandler.Conn.Exec("DELETE FROM tags WHERE id = ?", id)
+	if err != nil {
+		return err
+	}
+	return nil
+}

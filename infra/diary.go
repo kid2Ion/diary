@@ -64,9 +64,6 @@ func (dr *DiaryRepository) Update(id int, diary *model.Diary) error {
 	if err != nil {
 		return fmt.Errorf("failed to update diaries: %v", err)
 	}
-	if err != nil {
-		return err
-	}
 	return nil
 }
 
@@ -74,9 +71,6 @@ func (dr *DiaryRepository) Delete(id int) error {
 	_, err := dr.SqlHandler.Conn.Exec("DELETE FROM diaries WHERE id = ?", id)
 	if err != nil {
 		return fmt.Errorf("failed to delete diary: %v", err)
-	}
-	if err != nil {
-		return err
 	}
 	return nil
 }
