@@ -18,5 +18,5 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	handler.InitRouting(e, diaryHandler, tagHandler)
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start(":8082"))
 }
